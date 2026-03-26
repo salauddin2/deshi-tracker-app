@@ -1,0 +1,7 @@
+﻿Analyzing desitracker_mobile...                                 
+
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\product_form_bottom_sheet.dart:173:21 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\product_form_bottom_sheet.dart:202:23 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\staff_dashboard_screen.dart:128:15 - use_build_context_synchronously
+   info - The argument type 'int' isn't related to 'String' - lib\screens\take_order_screen.dart:219:56 - collection_methods_unrelated_type
+

@@ -1,0 +1,12 @@
+{
+  "_id": "69b68230fc14eda1fffb9f2d",
+  "name": "Test User",
+  "userStatus": "new",
+  "email": "verify.login@example.com",
+  "phone": "01711223344",
+  "role": "user",
+  "isBlocked": false,
+  "isDeleted": false,
+  "createdAt": "2026-03-15T09:56:01.168Z",
+  "updatedAt": "2026-03-15T09:56:01.168Z"
+}

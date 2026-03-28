@@ -14,7 +14,7 @@ class BusinessRepository {
     int limit = 20,
   }) async {
     try {
-      final response = await _apiService.get('/business/', queryParameters: {
+      final response = await _apiService.get('business/', queryParameters: {
         'isActive': 'true',
         'isDeleted': 'false',
         'page': page,
@@ -24,7 +24,15 @@ class BusinessRepository {
       });
 
       if (response.statusCode == 200) {
-        final List list = response.data['data'] ?? [];
+        final data = response.data;
+        final List list;
+        if (data is Map && data.containsKey('data')) {
+          list = data['data'] ?? [];
+        } else if (data is List) {
+          list = data;
+        } else {
+          list = [];
+        }
         final parsed = <Business>[];
         for (final e in list) {
           try {
@@ -43,9 +51,11 @@ class BusinessRepository {
 
   Future<Business?> getBusinessBySlug(String slug) async {
     try {
-      final response = await _apiService.get('/business/$slug');
+      final response = await _apiService.get('business/$slug');
       if (response.statusCode == 200) {
-        return Business.fromJson(response.data['data']);
+        final data = response.data;
+        final businessData = (data is Map && data.containsKey('data')) ? data['data'] : data;
+        return Business.fromJson(businessData);
       }
     } catch (e) {
       rethrow;
@@ -54,45 +64,60 @@ class BusinessRepository {
   }
 
   Future<Map<String, dynamic>> fetchAnalytics(String businessId) async {
-    final response = await _apiService.get('/analytics/$businessId');
-    return response.data['data'] ?? response.data;
+    final response = await _apiService.get('analytics/$businessId');
+    final data = response.data;
+    if (data is Map && data.containsKey('data')) {
+      return Map<String, dynamic>.from(data['data'] ?? {});
+    }
+    return data is Map ? Map<String, dynamic>.from(data) : {};
   }
 
   Future<Map<String, dynamic>> fetchContactAnalytics(String businessId) async {
-    final response = await _apiService.get('/analytics/$businessId/contact');
-    return response.data['data'] ?? response.data;
+    final response = await _apiService.get('analytics/$businessId/contact');
+    final data = response.data;
+    if (data is Map && data.containsKey('data')) {
+      return Map<String, dynamic>.from(data['data'] ?? {});
+    }
+    return data is Map ? Map<String, dynamic>.from(data) : {};
   }
 
   Future<List<dynamic>> getReviews(String businessId) async {
-    final response = await _apiService.get('/reviews/all/$businessId');
-    return response.data['data'] ?? response.data ?? [];
+    final response = await _apiService.get('reviews/all/$businessId');
+    final data = response.data;
+    if (data is Map && data.containsKey('data')) {
+      return data['data'] ?? [];
+    }
+    return data is List ? data : [];
   }
 
   // --- Categories ---
   Future<List<dynamic>> fetchCategories() async {
-    final response = await _apiService.get('/category/');
-    final List list = response.data['data'] ?? [];
-    return list;
+    final response = await _apiService.get('category/');
+    final data = response.data;
+    if (data is Map && data.containsKey('data')) {
+      return data['data'] ?? [];
+    }
+    return data is List ? data : [];
   }
 
   Future<Map<String, dynamic>> getPlatformCategory(String slug) async {
-    final response = await _apiService.get('/category/$slug');
+    final response = await _apiService.get('category/$slug');
     return response.data;
   }
 
   // --- Business Management ---
   Future<Map<String, dynamic>> registerBusiness(Map<String, dynamic> data) async {
-    final response = await _apiService.post('/business/register', data: data);
+    final response = await _apiService.post('business/register', data: data);
     return response.data;
   }
 
   Future<Map<String, dynamic>> updateBusiness(String slug, Map<String, dynamic> data) async {
-    final response = await _apiService.put('/business/$slug', data: data);
+    final response = await _apiService.put('business/$slug', data: data);
     return response.data;
   }
 
   Future<void> deleteBusiness(String slug) async {
-    await _apiService.delete('/business/$slug');
+    await _apiService.delete('business/$slug');
   }
 
   Future<Map<String, dynamic>> submitReview({
@@ -100,7 +125,7 @@ class BusinessRepository {
     required int rating,
     required String comment,
   }) async {
-    final response = await _apiService.post('/reviews/create', data: {
+    final response = await _apiService.post('reviews/create', data: {
       'business': businessId,
       'rating': rating,
       'comment': comment,
@@ -116,10 +141,18 @@ class BusinessRepository {
         await MultipartFile.fromFile(path),
       ));
     }
-    final response = await _apiService.post('/upload-images/myBusiness', data: formData);
+    final response = await _apiService.post('upload-images/myBusiness', data: formData);
     if (response.statusCode == 200) {
-      final List urls = response.data['data'] ?? [];
-      return urls.map((e) => e['url'].toString()).toList();
+      final dynamic responseData = response.data;
+      final List list;
+      if (responseData is Map && responseData.containsKey('data')) {
+        list = responseData['data'] ?? [];
+      } else if (responseData is List) {
+        list = responseData;
+      } else {
+        list = [];
+      }
+      return list.map((e) => e['url'].toString()).toList();
     }
     return [];
   }

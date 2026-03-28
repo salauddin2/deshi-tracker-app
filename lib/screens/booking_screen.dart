@@ -6,7 +6,8 @@ import '../providers/data_providers.dart';
 class BookingScreen extends ConsumerStatefulWidget {
   final String businessId;
   final String businessName;
-  const BookingScreen({super.key, required this.businessId, required this.businessName});
+  final String ownerId;
+  const BookingScreen({super.key, required this.businessId, required this.businessName, required this.ownerId});
 
   @override
   ConsumerState<BookingScreen> createState() => _BookingScreenState();
@@ -49,6 +50,7 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
     try {
       await ref.read(memberRepositoryProvider).createBooking(
         businessId: widget.businessId,
+        ownerId: widget.ownerId,
         name: _nameCtrl.text.trim(),
         email: _emailCtrl.text.trim(),
         phone: _phoneCtrl.text.trim(),

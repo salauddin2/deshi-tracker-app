@@ -11,7 +11,7 @@ class OrderRepository {
     String? to,
     String? status,
   }) async {
-    final response = await _apiService.get('/orders/business/$businessId', queryParameters: {
+    final response = await _apiService.get('orders/business/$businessId', queryParameters: {
       if (from != null) 'from': from,
       if (to != null) 'to': to,
       if (status != null) 'status': status,
@@ -20,12 +20,12 @@ class OrderRepository {
   }
 
   Future<Map<String, dynamic>> updateOrder(String id, Map<String, dynamic> data) async {
-    final response = await _apiService.patch('/orders/$id', data: data);
+    final response = await _apiService.patch('orders/$id', data: data);
     return response.data;
   }
 
   Future<Map<String, dynamic>> createOrder(Map<String, dynamic> data) async {
-    final response = await _apiService.post('/orders', data: data);
+    final response = await _apiService.post('orders', data: data);
     return response.data;
   }
 }

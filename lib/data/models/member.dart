@@ -6,14 +6,14 @@ part 'member.g.dart';
 @freezed
 class Member with _$Member {
   const factory Member({
-    String? id,
+    @JsonKey(name: '_id') String? id,
     @Default('') String name,
     @Default('') String email,
     String? phone,
-    String? serial,
-    @Default('') String businessId,
-    String? slug,
-    @Default(false) bool isVerified,
+    @JsonKey(name: 'serialNumber') String? serial,
+    @JsonKey(name: 'qrSlug') String? slug,
+    @JsonKey(name: 'active') @Default(false) bool isActive,
+    String? profileImageUrl,
   }) = _Member;
 
   factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);

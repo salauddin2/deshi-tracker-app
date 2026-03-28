@@ -11,7 +11,7 @@ class AuthRepository {
 
   Future<User?> login(String emailOrPhone, String password) async {
     try {
-      final response = await _apiService.post('/auth/login', data: {
+      final response = await _apiService.post('auth/login', data: {
         'email': emailOrPhone.contains('@') ? emailOrPhone : null,
         'phoneNumber': !emailOrPhone.contains('@') ? emailOrPhone : null,
         'password': password,
@@ -40,7 +40,7 @@ class AuthRepository {
 
   Future<User?> getMe() async {
     try {
-      final response = await _apiService.get('/users/me');
+      final response = await _apiService.get('users/me');
       if (response.statusCode == 200) {
         return User.fromJson(response.data['data']);
       }
@@ -52,7 +52,7 @@ class AuthRepository {
 
   Future<void> logout() async {
     try {
-      await _apiService.post('/auth/logout');
+      await _apiService.post('auth/logout');
     } finally {
       await _authService.clearAll();
     }
@@ -65,7 +65,7 @@ class AuthRepository {
     required String phone,
   }) async {
     try {
-      final response = await _apiService.post('/users/register', data: {
+      final response = await _apiService.post('users/register', data: {
         'name': name,
         'email': email,
         'password': password,
@@ -80,7 +80,7 @@ class AuthRepository {
 
   Future<bool> resetPassword(String token, String newPassword) async {
     try {
-      final response = await _apiService.post('/auth/reset-password/$token', data: {
+      final response = await _apiService.post('auth/reset-password/$token', data: {
         'newPassword': newPassword,
       });
       return response.statusCode == 200;
@@ -91,7 +91,7 @@ class AuthRepository {
 
   Future<bool> forgotPassword(String email) async {
     try {
-      final response = await _apiService.post('/auth/forgot-password', data: {
+      final response = await _apiService.post('auth/forgot-password', data: {
         'email': email,
       });
       return response.statusCode == 200;
@@ -108,7 +108,7 @@ class AuthRepository {
   }
 
   Future<User?> updateProfile(Map<String, dynamic> data) async {
-    final response = await _apiService.patch('/users/profile/update', data: data);
+    final response = await _apiService.patch('users/profile/update', data: data);
     if (response.statusCode == 200) {
       return User.fromJson(response.data['data']);
     }
@@ -124,7 +124,7 @@ class AuthRepository {
   }
 
   Future<User?> staffLogin(String email, String password) async {
-    final response = await _apiService.post('/staff/login', data: {
+    final response = await _apiService.post('staff/login', data: {
       'email': email,
       'password': password,
     });
@@ -139,7 +139,7 @@ class AuthRepository {
   }
 
   Future<bool> setupStaffAccount(String token, String password) async {
-    final response = await _apiService.post('/staff/setup-account/$token', data: {
+    final response = await _apiService.post('staff/setup-account/$token', data: {
       'password': password,
     });
     return response.statusCode == 200;
@@ -149,7 +149,7 @@ class AuthRepository {
     final formData = FormData.fromMap({
       'profile': await MultipartFile.fromFile(filePath),
     });
-    final response = await _apiService.post('/upload-images/profile', data: formData);
+    final response = await _apiService.post('upload-images/profile', data: formData);
     if (response.statusCode == 200) {
       return response.data['data']?['url'] ?? response.data['url'];
     }

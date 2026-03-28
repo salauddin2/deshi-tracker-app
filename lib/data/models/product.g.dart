@@ -24,35 +24,40 @@ Map<String, dynamic> _$$ProductOptionImplToJson(_$ProductOptionImpl instance) =>
       'choices': instance.choices,
     };
 
-_$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
-    _$ProductImpl(
-      id: json['id'] as String,
-      name: json['name'] as String? ?? '',
-      description: json['description'] as String? ?? '',
-      price: (json['price'] as num?)?.toDouble() ?? 0.0,
-      currency: json['currency'] as String? ?? 'GBP',
-      thumbnail: json['thumbnail'] as String? ?? '',
-      images:
-          (json['images'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
-      discountPercent: (json['discountPercent'] as num?)?.toDouble() ?? 0.0,
-      discountStart: json['discountStart'] == null
-          ? null
-          : DateTime.parse(json['discountStart'] as String),
-      discountEnd: json['discountEnd'] == null
-          ? null
-          : DateTime.parse(json['discountEnd'] as String),
-      finalPrice: (json['finalPrice'] as num?)?.toDouble() ?? 0.0,
-      businessId: json['businessId'] as String? ?? '',
-      categoryId: json['categoryId'] as String? ?? '',
-      options: json['options'] as List<dynamic>? ?? const [],
-    );
+_$ProductImpl _$$ProductImplFromJson(
+  Map<String, dynamic> json,
+) => _$ProductImpl(
+  id: _idFromObject(json['_id']),
+  name: json['name'] as String? ?? '',
+  description: json['description'] as String? ?? '',
+  price: json['price'] == null ? 0.0 : _toDouble(json['price']),
+  currency: json['currency'] as String? ?? 'GBP',
+  thumbnail: json['thumbnail'] as String? ?? '',
+  images:
+      (json['images'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
+  discountPercent: json['discountPercent'] == null
+      ? 0.0
+      : _toDouble(json['discountPercent']),
+  discountStart: json['discountStart'] == null
+      ? null
+      : DateTime.parse(json['discountStart'] as String),
+  discountEnd: json['discountEnd'] == null
+      ? null
+      : DateTime.parse(json['discountEnd'] as String),
+  finalPrice: json['finalPrice'] == null ? 0.0 : _toDouble(json['finalPrice']),
+  businessId: json['business_id'] == null
+      ? ''
+      : _idFromObject(json['business_id']),
+  categoryId: json['product_category_id'] == null
+      ? ''
+      : _idFromObject(json['product_category_id']),
+  options: json['options'] == null ? const [] : _idsFromList(json['options']),
+);
 
 Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'name': instance.name,
       'description': instance.description,
       'price': instance.price,
@@ -63,7 +68,7 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'discountStart': instance.discountStart?.toIso8601String(),
       'discountEnd': instance.discountEnd?.toIso8601String(),
       'finalPrice': instance.finalPrice,
-      'businessId': instance.businessId,
-      'categoryId': instance.categoryId,
+      'business_id': instance.businessId,
+      'product_category_id': instance.categoryId,
       'options': instance.options,
     };

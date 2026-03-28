@@ -165,8 +165,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/business/:id/book',
         builder: (context, state) {
           final id = state.pathParameters['id']!;
-          final name = (state.extra as Map<String, dynamic>?)?['businessName'] ?? 'Business';
-          return BookingScreen(businessId: id, businessName: name);
+          final extra = state.extra as Map<String, dynamic>?;
+          final name = extra?['businessName'] ?? 'Business';
+          final ownerId = extra?['ownerId'] ?? '';
+          return BookingScreen(businessId: id, businessName: name, ownerId: ownerId);
         },
       ),
       // ─── Phase 12: Fridge ───────────────────────────────────────────────────

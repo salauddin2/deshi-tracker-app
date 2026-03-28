@@ -2267,13 +2267,16 @@ Business _$BusinessFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Business {
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   String get id => throw _privateConstructorUsedError;
   String get businessName => throw _privateConstructorUsedError;
   String get checkoutNumber => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
+  @JsonKey(name: 'owner', fromJson: _idFromObject)
   String get ownerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'category', fromJson: _idFromObject)
   String get categoryId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'subCategory', fromJson: _idFromObject)
   String? get subCategoryId => throw _privateConstructorUsedError;
   String? get selectedType => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -2290,6 +2293,7 @@ mixin _$Business {
   bool get hasCustomerTestimonials => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
   bool get isHalal => throw _privateConstructorUsedError;
+  bool get isTrash => throw _privateConstructorUsedError;
   bool get isDeleted => throw _privateConstructorUsedError;
   List<OpeningHour> get openingHours => throw _privateConstructorUsedError;
   List<String> get paymentMethods => throw _privateConstructorUsedError;
@@ -2310,12 +2314,13 @@ abstract class $BusinessCopyWith<$Res> {
       _$BusinessCopyWithImpl<$Res, Business>;
   @useResult
   $Res call({
-    @JsonKey(name: '_id') String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) String id,
     String businessName,
     String checkoutNumber,
     String slug,
-    String ownerId,
-    String categoryId,
+    @JsonKey(name: 'owner', fromJson: _idFromObject) String ownerId,
+    @JsonKey(name: 'category', fromJson: _idFromObject) String categoryId,
+    @JsonKey(name: 'subCategory', fromJson: _idFromObject)
     String? subCategoryId,
     String? selectedType,
     String description,
@@ -2332,6 +2337,7 @@ abstract class $BusinessCopyWith<$Res> {
     bool hasCustomerTestimonials,
     bool isActive,
     bool isHalal,
+    bool isTrash,
     bool isDeleted,
     List<OpeningHour> openingHours,
     List<String> paymentMethods,
@@ -2381,6 +2387,7 @@ class _$BusinessCopyWithImpl<$Res, $Val extends Business>
     Object? hasCustomerTestimonials = null,
     Object? isActive = null,
     Object? isHalal = null,
+    Object? isTrash = null,
     Object? isDeleted = null,
     Object? openingHours = null,
     Object? paymentMethods = null,
@@ -2475,6 +2482,10 @@ class _$BusinessCopyWithImpl<$Res, $Val extends Business>
                 ? _value.isHalal
                 : isHalal // ignore: cast_nullable_to_non_nullable
                       as bool,
+            isTrash: null == isTrash
+                ? _value.isTrash
+                : isTrash // ignore: cast_nullable_to_non_nullable
+                      as bool,
             isDeleted: null == isDeleted
                 ? _value.isDeleted
                 : isDeleted // ignore: cast_nullable_to_non_nullable
@@ -2553,12 +2564,13 @@ abstract class _$$BusinessImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    @JsonKey(name: '_id') String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) String id,
     String businessName,
     String checkoutNumber,
     String slug,
-    String ownerId,
-    String categoryId,
+    @JsonKey(name: 'owner', fromJson: _idFromObject) String ownerId,
+    @JsonKey(name: 'category', fromJson: _idFromObject) String categoryId,
+    @JsonKey(name: 'subCategory', fromJson: _idFromObject)
     String? subCategoryId,
     String? selectedType,
     String description,
@@ -2575,6 +2587,7 @@ abstract class _$$BusinessImplCopyWith<$Res>
     bool hasCustomerTestimonials,
     bool isActive,
     bool isHalal,
+    bool isTrash,
     bool isDeleted,
     List<OpeningHour> openingHours,
     List<String> paymentMethods,
@@ -2628,6 +2641,7 @@ class __$$BusinessImplCopyWithImpl<$Res>
     Object? hasCustomerTestimonials = null,
     Object? isActive = null,
     Object? isHalal = null,
+    Object? isTrash = null,
     Object? isDeleted = null,
     Object? openingHours = null,
     Object? paymentMethods = null,
@@ -2722,6 +2736,10 @@ class __$$BusinessImplCopyWithImpl<$Res>
             ? _value.isHalal
             : isHalal // ignore: cast_nullable_to_non_nullable
                   as bool,
+        isTrash: null == isTrash
+            ? _value.isTrash
+            : isTrash // ignore: cast_nullable_to_non_nullable
+                  as bool,
         isDeleted: null == isDeleted
             ? _value.isDeleted
             : isDeleted // ignore: cast_nullable_to_non_nullable
@@ -2743,13 +2761,13 @@ class __$$BusinessImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BusinessImpl implements _Business {
   const _$BusinessImpl({
-    @JsonKey(name: '_id') required this.id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) required this.id,
     this.businessName = '',
     this.checkoutNumber = '',
     this.slug = '',
-    this.ownerId = '',
-    this.categoryId = '',
-    this.subCategoryId,
+    @JsonKey(name: 'owner', fromJson: _idFromObject) this.ownerId = '',
+    @JsonKey(name: 'category', fromJson: _idFromObject) this.categoryId = '',
+    @JsonKey(name: 'subCategory', fromJson: _idFromObject) this.subCategoryId,
     this.selectedType,
     this.description = '',
     this.established,
@@ -2765,6 +2783,7 @@ class _$BusinessImpl implements _Business {
     this.hasCustomerTestimonials = false,
     this.isActive = true,
     this.isHalal = true,
+    this.isTrash = false,
     this.isDeleted = false,
     final List<OpeningHour> openingHours = const [],
     final List<String> paymentMethods = const [],
@@ -2775,7 +2794,7 @@ class _$BusinessImpl implements _Business {
       _$$BusinessImplFromJson(json);
 
   @override
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   final String id;
   @override
   @JsonKey()
@@ -2787,12 +2806,13 @@ class _$BusinessImpl implements _Business {
   @JsonKey()
   final String slug;
   @override
-  @JsonKey()
+  @JsonKey(name: 'owner', fromJson: _idFromObject)
   final String ownerId;
   @override
-  @JsonKey()
+  @JsonKey(name: 'category', fromJson: _idFromObject)
   final String categoryId;
   @override
+  @JsonKey(name: 'subCategory', fromJson: _idFromObject)
   final String? subCategoryId;
   @override
   final String? selectedType;
@@ -2834,6 +2854,9 @@ class _$BusinessImpl implements _Business {
   final bool isHalal;
   @override
   @JsonKey()
+  final bool isTrash;
+  @override
+  @JsonKey()
   final bool isDeleted;
   final List<OpeningHour> _openingHours;
   @override
@@ -2855,7 +2878,7 @@ class _$BusinessImpl implements _Business {
 
   @override
   String toString() {
-    return 'Business(id: $id, businessName: $businessName, checkoutNumber: $checkoutNumber, slug: $slug, ownerId: $ownerId, categoryId: $categoryId, subCategoryId: $subCategoryId, selectedType: $selectedType, description: $description, established: $established, about: $about, logo: $logo, contactDetails: $contactDetails, locations: $locations, operationDetails: $operationDetails, features: $features, media: $media, howToHearAboutDesiTracker: $howToHearAboutDesiTracker, agreeToTermsConditions: $agreeToTermsConditions, hasCustomerTestimonials: $hasCustomerTestimonials, isActive: $isActive, isHalal: $isHalal, isDeleted: $isDeleted, openingHours: $openingHours, paymentMethods: $paymentMethods)';
+    return 'Business(id: $id, businessName: $businessName, checkoutNumber: $checkoutNumber, slug: $slug, ownerId: $ownerId, categoryId: $categoryId, subCategoryId: $subCategoryId, selectedType: $selectedType, description: $description, established: $established, about: $about, logo: $logo, contactDetails: $contactDetails, locations: $locations, operationDetails: $operationDetails, features: $features, media: $media, howToHearAboutDesiTracker: $howToHearAboutDesiTracker, agreeToTermsConditions: $agreeToTermsConditions, hasCustomerTestimonials: $hasCustomerTestimonials, isActive: $isActive, isHalal: $isHalal, isTrash: $isTrash, isDeleted: $isDeleted, openingHours: $openingHours, paymentMethods: $paymentMethods)';
   }
 
   @override
@@ -2906,6 +2929,7 @@ class _$BusinessImpl implements _Business {
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
             (identical(other.isHalal, isHalal) || other.isHalal == isHalal) &&
+            (identical(other.isTrash, isTrash) || other.isTrash == isTrash) &&
             (identical(other.isDeleted, isDeleted) ||
                 other.isDeleted == isDeleted) &&
             const DeepCollectionEquality().equals(
@@ -2944,6 +2968,7 @@ class _$BusinessImpl implements _Business {
     hasCustomerTestimonials,
     isActive,
     isHalal,
+    isTrash,
     isDeleted,
     const DeepCollectionEquality().hash(_openingHours),
     const DeepCollectionEquality().hash(_paymentMethods),
@@ -2965,12 +2990,13 @@ class _$BusinessImpl implements _Business {
 
 abstract class _Business implements Business {
   const factory _Business({
-    @JsonKey(name: '_id') required final String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) required final String id,
     final String businessName,
     final String checkoutNumber,
     final String slug,
-    final String ownerId,
-    final String categoryId,
+    @JsonKey(name: 'owner', fromJson: _idFromObject) final String ownerId,
+    @JsonKey(name: 'category', fromJson: _idFromObject) final String categoryId,
+    @JsonKey(name: 'subCategory', fromJson: _idFromObject)
     final String? subCategoryId,
     final String? selectedType,
     final String description,
@@ -2987,6 +3013,7 @@ abstract class _Business implements Business {
     final bool hasCustomerTestimonials,
     final bool isActive,
     final bool isHalal,
+    final bool isTrash,
     final bool isDeleted,
     final List<OpeningHour> openingHours,
     final List<String> paymentMethods,
@@ -2996,7 +3023,7 @@ abstract class _Business implements Business {
       _$BusinessImpl.fromJson;
 
   @override
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   String get id;
   @override
   String get businessName;
@@ -3005,10 +3032,13 @@ abstract class _Business implements Business {
   @override
   String get slug;
   @override
+  @JsonKey(name: 'owner', fromJson: _idFromObject)
   String get ownerId;
   @override
+  @JsonKey(name: 'category', fromJson: _idFromObject)
   String get categoryId;
   @override
+  @JsonKey(name: 'subCategory', fromJson: _idFromObject)
   String? get subCategoryId;
   @override
   String? get selectedType;
@@ -3040,6 +3070,8 @@ abstract class _Business implements Business {
   bool get isActive;
   @override
   bool get isHalal;
+  @override
+  bool get isTrash;
   @override
   bool get isDeleted;
   @override

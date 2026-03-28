@@ -8,9 +8,17 @@ class CategoryRepository {
 
   Future<List<Category>> getCategories() async {
     try {
-      final response = await _apiService.get('/category/all');
+      final response = await _apiService.get('category');
       if (response.statusCode == 200) {
-        final List list = response.data['data'] ?? [];
+        final data = response.data;
+        final List list;
+        if (data is Map && data.containsKey('data')) {
+          list = data['data'] ?? [];
+        } else if (data is List) {
+          list = data;
+        } else {
+          list = [];
+        }
         return list.map((e) => Category.fromJson(e)).toList();
       }
     } catch (e) {

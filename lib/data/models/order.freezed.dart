@@ -21,6 +21,7 @@ OrderItem _$OrderItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OrderItem {
+  @JsonKey(name: 'productId', fromJson: _idFromObject)
   String get product => throw _privateConstructorUsedError;
   String get productName => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $OrderItemCopyWith<$Res> {
       _$OrderItemCopyWithImpl<$Res, OrderItem>;
   @useResult
   $Res call({
-    String product,
+    @JsonKey(name: 'productId', fromJson: _idFromObject) String product,
     String productName,
     double price,
     int quantity,
@@ -110,7 +111,7 @@ abstract class _$$OrderItemImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String product,
+    @JsonKey(name: 'productId', fromJson: _idFromObject) String product,
     String productName,
     double price,
     int quantity,
@@ -169,7 +170,7 @@ class __$$OrderItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OrderItemImpl implements _OrderItem {
   const _$OrderItemImpl({
-    this.product = '',
+    @JsonKey(name: 'productId', fromJson: _idFromObject) this.product = '',
     this.productName = '',
     this.price = 0.0,
     this.quantity = 0,
@@ -180,7 +181,7 @@ class _$OrderItemImpl implements _OrderItem {
       _$$OrderItemImplFromJson(json);
 
   @override
-  @JsonKey()
+  @JsonKey(name: 'productId', fromJson: _idFromObject)
   final String product;
   @override
   @JsonKey()
@@ -250,7 +251,7 @@ class _$OrderItemImpl implements _OrderItem {
 
 abstract class _OrderItem implements OrderItem {
   const factory _OrderItem({
-    final String product,
+    @JsonKey(name: 'productId', fromJson: _idFromObject) final String product,
     final String productName,
     final double price,
     final int quantity,
@@ -261,6 +262,7 @@ abstract class _OrderItem implements OrderItem {
       _$OrderItemImpl.fromJson;
 
   @override
+  @JsonKey(name: 'productId', fromJson: _idFromObject)
   String get product;
   @override
   String get productName;
@@ -285,8 +287,11 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Order {
+  @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id', fromJson: _idFromObject)
   String get user => throw _privateConstructorUsedError;
+  @JsonKey(name: 'business_id', fromJson: _idFromObject)
   String get business => throw _privateConstructorUsedError;
   List<OrderItem> get items => throw _privateConstructorUsedError;
   double get totalAmount => throw _privateConstructorUsedError;
@@ -311,9 +316,9 @@ abstract class $OrderCopyWith<$Res> {
       _$OrderCopyWithImpl<$Res, Order>;
   @useResult
   $Res call({
-    String? id,
-    String user,
-    String business,
+    @JsonKey(name: '_id') String? id,
+    @JsonKey(name: 'user_id', fromJson: _idFromObject) String user,
+    @JsonKey(name: 'business_id', fromJson: _idFromObject) String business,
     List<OrderItem> items,
     double totalAmount,
     OrderStatus status,
@@ -407,9 +412,9 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    String? id,
-    String user,
-    String business,
+    @JsonKey(name: '_id') String? id,
+    @JsonKey(name: 'user_id', fromJson: _idFromObject) String user,
+    @JsonKey(name: 'business_id', fromJson: _idFromObject) String business,
     List<OrderItem> items,
     double totalAmount,
     OrderStatus status,
@@ -496,9 +501,9 @@ class __$$OrderImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OrderImpl implements _Order {
   const _$OrderImpl({
-    this.id,
-    this.user = '',
-    this.business = '',
+    @JsonKey(name: '_id') this.id,
+    @JsonKey(name: 'user_id', fromJson: _idFromObject) this.user = '',
+    @JsonKey(name: 'business_id', fromJson: _idFromObject) this.business = '',
     final List<OrderItem> items = const [],
     this.totalAmount = 0.0,
     this.status = OrderStatus.pending,
@@ -512,12 +517,13 @@ class _$OrderImpl implements _Order {
       _$$OrderImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String? id;
   @override
-  @JsonKey()
+  @JsonKey(name: 'user_id', fromJson: _idFromObject)
   final String user;
   @override
-  @JsonKey()
+  @JsonKey(name: 'business_id', fromJson: _idFromObject)
   final String business;
   final List<OrderItem> _items;
   @override
@@ -603,8 +609,9 @@ class _$OrderImpl implements _Order {
 
 abstract class _Order implements Order {
   const factory _Order({
-    final String? id,
-    final String user,
+    @JsonKey(name: '_id') final String? id,
+    @JsonKey(name: 'user_id', fromJson: _idFromObject) final String user,
+    @JsonKey(name: 'business_id', fromJson: _idFromObject)
     final String business,
     final List<OrderItem> items,
     final double totalAmount,
@@ -618,10 +625,13 @@ abstract class _Order implements Order {
   factory _Order.fromJson(Map<String, dynamic> json) = _$OrderImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String? get id;
   @override
+  @JsonKey(name: 'user_id', fromJson: _idFromObject)
   String get user;
   @override
+  @JsonKey(name: 'business_id', fromJson: _idFromObject)
   String get business;
   @override
   List<OrderItem> get items;

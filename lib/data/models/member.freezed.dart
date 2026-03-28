@@ -21,14 +21,18 @@ Member _$MemberFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Member {
+  @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'serialNumber')
   String? get serial => throw _privateConstructorUsedError;
-  String get businessId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'qrSlug')
   String? get slug => throw _privateConstructorUsedError;
-  bool get isVerified => throw _privateConstructorUsedError;
+  @JsonKey(name: 'active')
+  bool get isActive => throw _privateConstructorUsedError;
+  String? get profileImageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this Member to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,14 +49,14 @@ abstract class $MemberCopyWith<$Res> {
       _$MemberCopyWithImpl<$Res, Member>;
   @useResult
   $Res call({
-    String? id,
+    @JsonKey(name: '_id') String? id,
     String name,
     String email,
     String? phone,
-    String? serial,
-    String businessId,
-    String? slug,
-    bool isVerified,
+    @JsonKey(name: 'serialNumber') String? serial,
+    @JsonKey(name: 'qrSlug') String? slug,
+    @JsonKey(name: 'active') bool isActive,
+    String? profileImageUrl,
   });
 }
 
@@ -76,9 +80,9 @@ class _$MemberCopyWithImpl<$Res, $Val extends Member>
     Object? email = null,
     Object? phone = freezed,
     Object? serial = freezed,
-    Object? businessId = null,
     Object? slug = freezed,
-    Object? isVerified = null,
+    Object? isActive = null,
+    Object? profileImageUrl = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -102,18 +106,18 @@ class _$MemberCopyWithImpl<$Res, $Val extends Member>
                 ? _value.serial
                 : serial // ignore: cast_nullable_to_non_nullable
                       as String?,
-            businessId: null == businessId
-                ? _value.businessId
-                : businessId // ignore: cast_nullable_to_non_nullable
-                      as String,
             slug: freezed == slug
                 ? _value.slug
                 : slug // ignore: cast_nullable_to_non_nullable
                       as String?,
-            isVerified: null == isVerified
-                ? _value.isVerified
-                : isVerified // ignore: cast_nullable_to_non_nullable
+            isActive: null == isActive
+                ? _value.isActive
+                : isActive // ignore: cast_nullable_to_non_nullable
                       as bool,
+            profileImageUrl: freezed == profileImageUrl
+                ? _value.profileImageUrl
+                : profileImageUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -129,14 +133,14 @@ abstract class _$$MemberImplCopyWith<$Res> implements $MemberCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    String? id,
+    @JsonKey(name: '_id') String? id,
     String name,
     String email,
     String? phone,
-    String? serial,
-    String businessId,
-    String? slug,
-    bool isVerified,
+    @JsonKey(name: 'serialNumber') String? serial,
+    @JsonKey(name: 'qrSlug') String? slug,
+    @JsonKey(name: 'active') bool isActive,
+    String? profileImageUrl,
   });
 }
 
@@ -159,9 +163,9 @@ class __$$MemberImplCopyWithImpl<$Res>
     Object? email = null,
     Object? phone = freezed,
     Object? serial = freezed,
-    Object? businessId = null,
     Object? slug = freezed,
-    Object? isVerified = null,
+    Object? isActive = null,
+    Object? profileImageUrl = freezed,
   }) {
     return _then(
       _$MemberImpl(
@@ -185,18 +189,18 @@ class __$$MemberImplCopyWithImpl<$Res>
             ? _value.serial
             : serial // ignore: cast_nullable_to_non_nullable
                   as String?,
-        businessId: null == businessId
-            ? _value.businessId
-            : businessId // ignore: cast_nullable_to_non_nullable
-                  as String,
         slug: freezed == slug
             ? _value.slug
             : slug // ignore: cast_nullable_to_non_nullable
                   as String?,
-        isVerified: null == isVerified
-            ? _value.isVerified
-            : isVerified // ignore: cast_nullable_to_non_nullable
+        isActive: null == isActive
+            ? _value.isActive
+            : isActive // ignore: cast_nullable_to_non_nullable
                   as bool,
+        profileImageUrl: freezed == profileImageUrl
+            ? _value.profileImageUrl
+            : profileImageUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -206,20 +210,21 @@ class __$$MemberImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MemberImpl implements _Member {
   const _$MemberImpl({
-    this.id,
+    @JsonKey(name: '_id') this.id,
     this.name = '',
     this.email = '',
     this.phone,
-    this.serial,
-    this.businessId = '',
-    this.slug,
-    this.isVerified = false,
+    @JsonKey(name: 'serialNumber') this.serial,
+    @JsonKey(name: 'qrSlug') this.slug,
+    @JsonKey(name: 'active') this.isActive = false,
+    this.profileImageUrl,
   });
 
   factory _$MemberImpl.fromJson(Map<String, dynamic> json) =>
       _$$MemberImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String? id;
   @override
   @JsonKey()
@@ -230,19 +235,20 @@ class _$MemberImpl implements _Member {
   @override
   final String? phone;
   @override
+  @JsonKey(name: 'serialNumber')
   final String? serial;
   @override
-  @JsonKey()
-  final String businessId;
-  @override
+  @JsonKey(name: 'qrSlug')
   final String? slug;
   @override
-  @JsonKey()
-  final bool isVerified;
+  @JsonKey(name: 'active')
+  final bool isActive;
+  @override
+  final String? profileImageUrl;
 
   @override
   String toString() {
-    return 'Member(id: $id, name: $name, email: $email, phone: $phone, serial: $serial, businessId: $businessId, slug: $slug, isVerified: $isVerified)';
+    return 'Member(id: $id, name: $name, email: $email, phone: $phone, serial: $serial, slug: $slug, isActive: $isActive, profileImageUrl: $profileImageUrl)';
   }
 
   @override
@@ -255,11 +261,11 @@ class _$MemberImpl implements _Member {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.serial, serial) || other.serial == serial) &&
-            (identical(other.businessId, businessId) ||
-                other.businessId == businessId) &&
             (identical(other.slug, slug) || other.slug == slug) &&
-            (identical(other.isVerified, isVerified) ||
-                other.isVerified == isVerified));
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
+            (identical(other.profileImageUrl, profileImageUrl) ||
+                other.profileImageUrl == profileImageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -271,9 +277,9 @@ class _$MemberImpl implements _Member {
     email,
     phone,
     serial,
-    businessId,
     slug,
-    isVerified,
+    isActive,
+    profileImageUrl,
   );
 
   /// Create a copy of Member
@@ -292,19 +298,20 @@ class _$MemberImpl implements _Member {
 
 abstract class _Member implements Member {
   const factory _Member({
-    final String? id,
+    @JsonKey(name: '_id') final String? id,
     final String name,
     final String email,
     final String? phone,
-    final String? serial,
-    final String businessId,
-    final String? slug,
-    final bool isVerified,
+    @JsonKey(name: 'serialNumber') final String? serial,
+    @JsonKey(name: 'qrSlug') final String? slug,
+    @JsonKey(name: 'active') final bool isActive,
+    final String? profileImageUrl,
   }) = _$MemberImpl;
 
   factory _Member.fromJson(Map<String, dynamic> json) = _$MemberImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String? get id;
   @override
   String get name;
@@ -313,13 +320,16 @@ abstract class _Member implements Member {
   @override
   String? get phone;
   @override
+  @JsonKey(name: 'serialNumber')
   String? get serial;
   @override
-  String get businessId;
-  @override
+  @JsonKey(name: 'qrSlug')
   String? get slug;
   @override
-  bool get isVerified;
+  @JsonKey(name: 'active')
+  bool get isActive;
+  @override
+  String? get profileImageUrl;
 
   /// Create a copy of Member
   /// with the given fields replaced by the non-null parameter values.

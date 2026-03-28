@@ -7,24 +7,24 @@ part of 'member.dart';
 // **************************************************************************
 
 _$MemberImpl _$$MemberImplFromJson(Map<String, dynamic> json) => _$MemberImpl(
-  id: json['id'] as String?,
+  id: json['_id'] as String?,
   name: json['name'] as String? ?? '',
   email: json['email'] as String? ?? '',
   phone: json['phone'] as String?,
-  serial: json['serial'] as String?,
-  businessId: json['businessId'] as String? ?? '',
-  slug: json['slug'] as String?,
-  isVerified: json['isVerified'] as bool? ?? false,
+  serial: json['serialNumber'] as String?,
+  slug: json['qrSlug'] as String?,
+  isActive: json['active'] as bool? ?? false,
+  profileImageUrl: json['profileImageUrl'] as String?,
 );
 
 Map<String, dynamic> _$$MemberImplToJson(_$MemberImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'name': instance.name,
       'email': instance.email,
       'phone': instance.phone,
-      'serial': instance.serial,
-      'businessId': instance.businessId,
-      'slug': instance.slug,
-      'isVerified': instance.isVerified,
+      'serialNumber': instance.serial,
+      'qrSlug': instance.slug,
+      'active': instance.isActive,
+      'profileImageUrl': instance.profileImageUrl,
     };

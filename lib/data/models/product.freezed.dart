@@ -220,20 +220,27 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Product {
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _toDouble)
   double get price => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _toDouble)
   double get discountPercent => throw _privateConstructorUsedError;
   DateTime? get discountStart => throw _privateConstructorUsedError;
   DateTime? get discountEnd => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _toDouble)
   double get finalPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'business_id', fromJson: _idFromObject)
   String get businessId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'product_category_id', fromJson: _idFromObject)
   String get categoryId => throw _privateConstructorUsedError;
-  List<dynamic> get options => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _idsFromList)
+  List<String> get options => throw _privateConstructorUsedError;
 
   /// Serializes this Product to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -250,20 +257,21 @@ abstract class $ProductCopyWith<$Res> {
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call({
-    String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) String id,
     String name,
     String description,
-    double price,
+    @JsonKey(fromJson: _toDouble) double price,
     String currency,
     String thumbnail,
     List<String> images,
-    double discountPercent,
+    @JsonKey(fromJson: _toDouble) double discountPercent,
     DateTime? discountStart,
     DateTime? discountEnd,
-    double finalPrice,
-    String businessId,
+    @JsonKey(fromJson: _toDouble) double finalPrice,
+    @JsonKey(name: 'business_id', fromJson: _idFromObject) String businessId,
+    @JsonKey(name: 'product_category_id', fromJson: _idFromObject)
     String categoryId,
-    List<dynamic> options,
+    @JsonKey(fromJson: _idsFromList) List<String> options,
   });
 }
 
@@ -354,7 +362,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
             options: null == options
                 ? _value.options
                 : options // ignore: cast_nullable_to_non_nullable
-                      as List<dynamic>,
+                      as List<String>,
           )
           as $Val,
     );
@@ -370,20 +378,21 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) String id,
     String name,
     String description,
-    double price,
+    @JsonKey(fromJson: _toDouble) double price,
     String currency,
     String thumbnail,
     List<String> images,
-    double discountPercent,
+    @JsonKey(fromJson: _toDouble) double discountPercent,
     DateTime? discountStart,
     DateTime? discountEnd,
-    double finalPrice,
-    String businessId,
+    @JsonKey(fromJson: _toDouble) double finalPrice,
+    @JsonKey(name: 'business_id', fromJson: _idFromObject) String businessId,
+    @JsonKey(name: 'product_category_id', fromJson: _idFromObject)
     String categoryId,
-    List<dynamic> options,
+    @JsonKey(fromJson: _idsFromList) List<String> options,
   });
 }
 
@@ -473,7 +482,7 @@ class __$$ProductImplCopyWithImpl<$Res>
         options: null == options
             ? _value._options
             : options // ignore: cast_nullable_to_non_nullable
-                  as List<dynamic>,
+                  as List<String>,
       ),
     );
   }
@@ -483,20 +492,21 @@ class __$$ProductImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductImpl implements _Product {
   const _$ProductImpl({
-    required this.id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) required this.id,
     this.name = '',
     this.description = '',
-    this.price = 0.0,
+    @JsonKey(fromJson: _toDouble) this.price = 0.0,
     this.currency = 'GBP',
     this.thumbnail = '',
     final List<String> images = const [],
-    this.discountPercent = 0.0,
+    @JsonKey(fromJson: _toDouble) this.discountPercent = 0.0,
     this.discountStart,
     this.discountEnd,
-    this.finalPrice = 0.0,
-    this.businessId = '',
+    @JsonKey(fromJson: _toDouble) this.finalPrice = 0.0,
+    @JsonKey(name: 'business_id', fromJson: _idFromObject) this.businessId = '',
+    @JsonKey(name: 'product_category_id', fromJson: _idFromObject)
     this.categoryId = '',
-    final List<dynamic> options = const [],
+    @JsonKey(fromJson: _idsFromList) final List<String> options = const [],
   }) : _images = images,
        _options = options;
 
@@ -504,6 +514,7 @@ class _$ProductImpl implements _Product {
       _$$ProductImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   final String id;
   @override
   @JsonKey()
@@ -512,7 +523,7 @@ class _$ProductImpl implements _Product {
   @JsonKey()
   final String description;
   @override
-  @JsonKey()
+  @JsonKey(fromJson: _toDouble)
   final double price;
   @override
   @JsonKey()
@@ -530,25 +541,25 @@ class _$ProductImpl implements _Product {
   }
 
   @override
-  @JsonKey()
+  @JsonKey(fromJson: _toDouble)
   final double discountPercent;
   @override
   final DateTime? discountStart;
   @override
   final DateTime? discountEnd;
   @override
-  @JsonKey()
+  @JsonKey(fromJson: _toDouble)
   final double finalPrice;
   @override
-  @JsonKey()
+  @JsonKey(name: 'business_id', fromJson: _idFromObject)
   final String businessId;
   @override
-  @JsonKey()
+  @JsonKey(name: 'product_category_id', fromJson: _idFromObject)
   final String categoryId;
-  final List<dynamic> _options;
+  final List<String> _options;
   @override
-  @JsonKey()
-  List<dynamic> get options {
+  @JsonKey(fromJson: _idsFromList)
+  List<String> get options {
     if (_options is EqualUnmodifiableListView) return _options;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_options);
@@ -625,31 +636,35 @@ class _$ProductImpl implements _Product {
 
 abstract class _Product implements Product {
   const factory _Product({
-    required final String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) required final String id,
     final String name,
     final String description,
-    final double price,
+    @JsonKey(fromJson: _toDouble) final double price,
     final String currency,
     final String thumbnail,
     final List<String> images,
-    final double discountPercent,
+    @JsonKey(fromJson: _toDouble) final double discountPercent,
     final DateTime? discountStart,
     final DateTime? discountEnd,
-    final double finalPrice,
+    @JsonKey(fromJson: _toDouble) final double finalPrice,
+    @JsonKey(name: 'business_id', fromJson: _idFromObject)
     final String businessId,
+    @JsonKey(name: 'product_category_id', fromJson: _idFromObject)
     final String categoryId,
-    final List<dynamic> options,
+    @JsonKey(fromJson: _idsFromList) final List<String> options,
   }) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   String get id;
   @override
   String get name;
   @override
   String get description;
   @override
+  @JsonKey(fromJson: _toDouble)
   double get price;
   @override
   String get currency;
@@ -658,19 +673,24 @@ abstract class _Product implements Product {
   @override
   List<String> get images;
   @override
+  @JsonKey(fromJson: _toDouble)
   double get discountPercent;
   @override
   DateTime? get discountStart;
   @override
   DateTime? get discountEnd;
   @override
+  @JsonKey(fromJson: _toDouble)
   double get finalPrice;
   @override
+  @JsonKey(name: 'business_id', fromJson: _idFromObject)
   String get businessId;
   @override
+  @JsonKey(name: 'product_category_id', fromJson: _idFromObject)
   String get categoryId;
   @override
-  List<dynamic> get options;
+  @JsonKey(fromJson: _idsFromList)
+  List<String> get options;
 
   /// Create a copy of Product
   /// with the given fields replaced by the non-null parameter values.

@@ -379,6 +379,21 @@ class _BusinessDetailScreenState extends ConsumerState<BusinessDetailScreen> {
             ),
           ),
         FloatingActionButton.extended(
+          heroTag: 'book',
+          onPressed: () => context.push(
+            '/business/${biz.id}/book',
+            extra: {
+              'businessName': biz.businessName,
+              'ownerId': biz.ownerId,
+            },
+          ),
+          backgroundColor: Colors.orange,
+          foregroundColor: Colors.white,
+          icon: const Icon(Icons.calendar_today),
+          label: const Text('Book'),
+        ),
+        const SizedBox(width: 12),
+        FloatingActionButton.extended(
           heroTag: 'call',
           onPressed: () {}, // Implement dialer
           backgroundColor: Theme.of(context).primaryColor,

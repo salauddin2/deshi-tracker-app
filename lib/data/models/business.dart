@@ -116,16 +116,23 @@ class OpeningHour with _$OpeningHour {
   factory OpeningHour.fromJson(Map<String, dynamic> json) => _$OpeningHourFromJson(json);
 }
 
+String _idFromObject(dynamic val) {
+  if (val == null) return '';
+  if (val is Map) return val['_id'] as String? ?? val['id'] as String? ?? '';
+  if (val is String) return val;
+  return '';
+}
+
 @freezed
 class Business with _$Business {
   const factory Business({
-    @JsonKey(name: '_id') required String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) required String id,
     @Default('') String businessName,
     @Default('') String checkoutNumber,
     @Default('') String slug,
-    @Default('') String ownerId,
-    @Default('') String categoryId,
-    String? subCategoryId,
+    @JsonKey(name: 'owner', fromJson: _idFromObject) @Default('') String ownerId,
+    @JsonKey(name: 'category', fromJson: _idFromObject) @Default('') String categoryId,
+    @JsonKey(name: 'subCategory', fromJson: _idFromObject) String? subCategoryId,
     String? selectedType,
     @Default('') String description,
     DateTime? established,
@@ -141,6 +148,7 @@ class Business with _$Business {
     @Default(false) bool hasCustomerTestimonials,
     @Default(true) bool isActive,
     @Default(true) bool isHalal,
+    @Default(false) bool isTrash,
     @Default(false) bool isDeleted,
     @Default([]) List<OpeningHour> openingHours,
     @Default([]) List<String> paymentMethods,

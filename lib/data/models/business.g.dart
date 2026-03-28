@@ -187,13 +187,13 @@ Map<String, dynamic> _$$OpeningHourImplToJson(_$OpeningHourImpl instance) =>
 _$BusinessImpl _$$BusinessImplFromJson(
   Map<String, dynamic> json,
 ) => _$BusinessImpl(
-  id: json['_id'] as String,
+  id: _idFromObject(json['_id']),
   businessName: json['businessName'] as String? ?? '',
   checkoutNumber: json['checkoutNumber'] as String? ?? '',
   slug: json['slug'] as String? ?? '',
-  ownerId: json['ownerId'] as String? ?? '',
-  categoryId: json['categoryId'] as String? ?? '',
-  subCategoryId: json['subCategoryId'] as String?,
+  ownerId: json['owner'] == null ? '' : _idFromObject(json['owner']),
+  categoryId: json['category'] == null ? '' : _idFromObject(json['category']),
+  subCategoryId: _idFromObject(json['subCategory']),
   selectedType: json['selectedType'] as String?,
   description: json['description'] as String? ?? '',
   established: json['established'] == null
@@ -217,6 +217,7 @@ _$BusinessImpl _$$BusinessImplFromJson(
   hasCustomerTestimonials: json['hasCustomerTestimonials'] as bool? ?? false,
   isActive: json['isActive'] as bool? ?? true,
   isHalal: json['isHalal'] as bool? ?? true,
+  isTrash: json['isTrash'] as bool? ?? false,
   isDeleted: json['isDeleted'] as bool? ?? false,
   openingHours:
       (json['openingHours'] as List<dynamic>?)
@@ -236,9 +237,9 @@ Map<String, dynamic> _$$BusinessImplToJson(_$BusinessImpl instance) =>
       'businessName': instance.businessName,
       'checkoutNumber': instance.checkoutNumber,
       'slug': instance.slug,
-      'ownerId': instance.ownerId,
-      'categoryId': instance.categoryId,
-      'subCategoryId': instance.subCategoryId,
+      'owner': instance.ownerId,
+      'category': instance.categoryId,
+      'subCategory': instance.subCategoryId,
       'selectedType': instance.selectedType,
       'description': instance.description,
       'established': instance.established?.toIso8601String(),
@@ -254,6 +255,7 @@ Map<String, dynamic> _$$BusinessImplToJson(_$BusinessImpl instance) =>
       'hasCustomerTestimonials': instance.hasCustomerTestimonials,
       'isActive': instance.isActive,
       'isHalal': instance.isHalal,
+      'isTrash': instance.isTrash,
       'isDeleted': instance.isDeleted,
       'openingHours': instance.openingHours,
       'paymentMethods': instance.paymentMethods,

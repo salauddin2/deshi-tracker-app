@@ -21,12 +21,13 @@ Category _$CategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Category {
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
   String get details => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _idsFromList)
   List<String> get subCategories => throw _privateConstructorUsedError;
 
   /// Serializes this Category to a JSON map.
@@ -45,12 +46,12 @@ abstract class $CategoryCopyWith<$Res> {
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
   $Res call({
-    @JsonKey(name: '_id') String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) String id,
     String name,
     String icon,
     String slug,
     String details,
-    List<String> subCategories,
+    @JsonKey(fromJson: _idsFromList) List<String> subCategories,
   });
 }
 
@@ -118,12 +119,12 @@ abstract class _$$CategoryImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    @JsonKey(name: '_id') String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) String id,
     String name,
     String icon,
     String slug,
     String details,
-    List<String> subCategories,
+    @JsonKey(fromJson: _idsFromList) List<String> subCategories,
   });
 }
 
@@ -183,11 +184,12 @@ class __$$CategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CategoryImpl implements _Category {
   const _$CategoryImpl({
-    @JsonKey(name: '_id') required this.id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) required this.id,
     this.name = '',
     this.icon = '',
     this.slug = '',
     this.details = '',
+    @JsonKey(fromJson: _idsFromList)
     final List<String> subCategories = const [],
   }) : _subCategories = subCategories;
 
@@ -195,7 +197,7 @@ class _$CategoryImpl implements _Category {
       _$$CategoryImplFromJson(json);
 
   @override
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   final String id;
   @override
   @JsonKey()
@@ -211,7 +213,7 @@ class _$CategoryImpl implements _Category {
   final String details;
   final List<String> _subCategories;
   @override
-  @JsonKey()
+  @JsonKey(fromJson: _idsFromList)
   List<String> get subCategories {
     if (_subCategories is EqualUnmodifiableListView) return _subCategories;
     // ignore: implicit_dynamic_type
@@ -267,19 +269,19 @@ class _$CategoryImpl implements _Category {
 
 abstract class _Category implements Category {
   const factory _Category({
-    @JsonKey(name: '_id') required final String id,
+    @JsonKey(name: '_id', fromJson: _idFromObject) required final String id,
     final String name,
     final String icon,
     final String slug,
     final String details,
-    final List<String> subCategories,
+    @JsonKey(fromJson: _idsFromList) final List<String> subCategories,
   }) = _$CategoryImpl;
 
   factory _Category.fromJson(Map<String, dynamic> json) =
       _$CategoryImpl.fromJson;
 
   @override
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', fromJson: _idFromObject)
   String get id;
   @override
   String get name;
@@ -290,6 +292,7 @@ abstract class _Category implements Category {
   @override
   String get details;
   @override
+  @JsonKey(fromJson: _idsFromList)
   List<String> get subCategories;
 
   /// Create a copy of Category

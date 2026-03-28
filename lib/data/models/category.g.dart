@@ -8,16 +8,14 @@ part of 'category.dart';
 
 _$CategoryImpl _$$CategoryImplFromJson(Map<String, dynamic> json) =>
     _$CategoryImpl(
-      id: json['_id'] as String,
+      id: _idFromObject(json['_id']),
       name: json['name'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       slug: json['slug'] as String? ?? '',
       details: json['details'] as String? ?? '',
-      subCategories:
-          (json['subCategories'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
+      subCategories: json['subCategories'] == null
+          ? const []
+          : _idsFromList(json['subCategories']),
     );
 
 Map<String, dynamic> _$$CategoryImplToJson(_$CategoryImpl instance) =>

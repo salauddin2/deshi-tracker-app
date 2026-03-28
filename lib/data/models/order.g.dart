@@ -8,7 +8,9 @@ part of 'order.dart';
 
 _$OrderItemImpl _$$OrderItemImplFromJson(Map<String, dynamic> json) =>
     _$OrderItemImpl(
-      product: json['product'] as String? ?? '',
+      product: json['productId'] == null
+          ? ''
+          : _idFromObject(json['productId']),
       productName: json['productName'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
       quantity: (json['quantity'] as num?)?.toInt() ?? 0,
@@ -19,7 +21,7 @@ _$OrderItemImpl _$$OrderItemImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$OrderItemImplToJson(_$OrderItemImpl instance) =>
     <String, dynamic>{
-      'product': instance.product,
+      'productId': instance.product,
       'productName': instance.productName,
       'price': instance.price,
       'quantity': instance.quantity,
@@ -27,9 +29,11 @@ Map<String, dynamic> _$$OrderItemImplToJson(_$OrderItemImpl instance) =>
     };
 
 _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
-  id: json['id'] as String?,
-  user: json['user'] as String? ?? '',
-  business: json['business'] as String? ?? '',
+  id: json['_id'] as String?,
+  user: json['user_id'] == null ? '' : _idFromObject(json['user_id']),
+  business: json['business_id'] == null
+      ? ''
+      : _idFromObject(json['business_id']),
   items:
       (json['items'] as List<dynamic>?)
           ?.map((e) => OrderItem.fromJson(e as Map<String, dynamic>))
@@ -49,9 +53,9 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
 
 Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'user': instance.user,
-      'business': instance.business,
+      '_id': instance.id,
+      'user_id': instance.user,
+      'business_id': instance.business,
       'items': instance.items,
       'totalAmount': instance.totalAmount,
       'status': _$OrderStatusEnumMap[instance.status]!,

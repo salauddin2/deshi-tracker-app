@@ -76,6 +76,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     try {
       debugPrint('Home: waiting for futures...');
+      // Note: failures are handled individually via .catchError on the futures themselves
       final results = await Future.wait([categoriesFuture, bizFuture]);
       debugPrint('Home: futures completed');
 
@@ -87,7 +88,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           _categories = cats;
           _businesses = bizList;
           _isLoading = false;
-          _hasError = bizList.isEmpty && cats.isEmpty;
+          _hasError = bizList.isEmpty && cats.isEmpty && _searchController.text.isEmpty;
         });
         debugPrint('Home: state updated: ${_businesses.length} businesses, ${_categories.length} categories');
       }

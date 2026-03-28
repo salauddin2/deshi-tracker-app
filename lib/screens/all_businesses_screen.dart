@@ -55,20 +55,31 @@ class _AllBusinessesScreenState extends ConsumerState<AllBusinessesScreen> {
       _currentPage = 1;
     });
 
-    final businesses = await ref.read(businessRepositoryProvider).getBusinesses(
-      query: _searchController.text.isEmpty ? null : _searchController.text,
-      page: 1,
-      limit: _pageSize,
-    );
+    try {
+      final businesses = await ref.read(businessRepositoryProvider).getBusinesses(
+        query: _searchController.text.isEmpty ? null : _searchController.text,
+        page: 1,
+        limit: _pageSize,
+      );
 
-    if (mounted) {
-      setState(() {
-        _businesses = businesses;
-        _hasMore = businesses.length == _pageSize;
-        _currentPage = 1;
-        _isLoading = false;
-        _hasError = false;
-      });
+      if (mounted) {
+        setState(() {
+          _businesses = businesses;
+          _hasMore = businesses.length == _pageSize;
+          _currentPage = 1;
+          _isLoading = false;
+          _hasError = false;
+        });
+      }
+    } catch (e) {
+      debugPrint('Error loading businesses: $e');
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+          _hasError = true;
+          _businesses = [];
+        });
+      }
     }
   }
 
@@ -77,20 +88,27 @@ class _AllBusinessesScreenState extends ConsumerState<AllBusinessesScreen> {
 
     setState(() => _isFetchingMore = true);
 
-    final nextPage = _currentPage + 1;
-    final businesses = await ref.read(businessRepositoryProvider).getBusinesses(
-      query: _searchController.text.isEmpty ? null : _searchController.text,
-      page: nextPage,
-      limit: _pageSize,
-    );
+    try {
+      final nextPage = _currentPage + 1;
+      final businesses = await ref.read(businessRepositoryProvider).getBusinesses(
+        query: _searchController.text.isEmpty ? null : _searchController.text,
+        page: nextPage,
+        limit: _pageSize,
+      );
 
-    if (mounted) {
-      setState(() {
-        _businesses.addAll(businesses);
-        _currentPage = nextPage;
-        _hasMore = businesses.length == _pageSize;
-        _isFetchingMore = false;
-      });
+      if (mounted) {
+        setState(() {
+          _businesses.addAll(businesses);
+          _currentPage = nextPage;
+          _hasMore = businesses.length == _pageSize;
+          _isFetchingMore = false;
+        });
+      }
+    } catch (e) {
+      debugPrint('Error loading more businesses: $e');
+      if (mounted) {
+        setState(() => _isFetchingMore = false);
+      }
     }
   }
 

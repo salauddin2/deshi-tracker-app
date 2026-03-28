@@ -8,7 +8,7 @@ class CategoryRepository {
 
   Future<List<Category>> getCategories() async {
     try {
-      final response = await _apiService.get('category');
+      final response = await _apiService.get('category/');
       if (response.statusCode == 200) {
         final data = response.data;
         final List list;
@@ -19,7 +19,16 @@ class CategoryRepository {
         } else {
           list = [];
         }
-        return list.map((e) => Category.fromJson(e)).toList();
+        
+        final parsed = <Category>[];
+        for (final e in list) {
+          try {
+            parsed.add(Category.fromJson(e));
+          } catch (err) {
+            print('CategoryParseError: $err');
+          }
+        }
+        return parsed;
       }
     } catch (e) {
       rethrow;
